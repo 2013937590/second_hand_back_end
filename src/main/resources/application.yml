@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/second_hand?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.fyy.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+jwt:
+  secret: "4tC87RY20cI2cWpQgz8mBpIgEyZkBpUFxITRS4U9UiJN2WFkPF2zdCSHLGMkOGj6ga2wWafxHPUoeenjmV7Fjw"
+  expiration: 86400000  # 24小时
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html 

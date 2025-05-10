@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fyy.mapper.OrderMapper">
+    
+    <resultMap id="BaseResultMap" type="com.fyy.entity.Order">
+        <id column="id" property="id"/>
+        <result column="product_id" property="productId"/>
+        <result column="buyer_id" property="buyerId"/>
+        <result column="seller_id" property="sellerId"/>
+        <result column="price" property="price"/>
+        <result column="status" property="status"/>
+        <result column="address" property="address"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.fyy.entity.Order" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order` (product_id, buyer_id, seller_id, price, status, address, contact_name, contact_phone,created_at, updated_at)
+        VALUES (#{productId}, #{buyerId}, #{sellerId}, #{price}, #{status}, #{address}, #{contactName}, #{contactPhone},#{createdAt}, #{updatedAt})
+    </insert>
+
+    <select id="findById" resultMap="BaseResultMap">
+        SELECT * FROM `order` WHERE id = #{id}
+    </select>
+
+    <select id="findByBuyerId" resultMap="BaseResultMap">
+        SELECT * FROM `order` WHERE buyer_id = #{buyerId} ORDER BY created_at DESC
+    </select>
+
+    <select id="findBySellerId" resultMap="BaseResultMap">
+        SELECT * FROM `order` WHERE seller_id = #{sellerId} ORDER BY created_at DESC
+    </select>
+
+    <update id="updateStatus">
+        UPDATE `order` SET status = #{status}, updated_at = NOW() WHERE id = #{id}
+    </update>
+</mapper> 
