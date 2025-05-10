@@ -52,6 +52,5 @@
 - Redis缓存提升性能
 - MyBatis-Plus简化数据库操作
 - Swagger自动生成API文档
-- 统一的异常处理
-- 规范的参数校验
+
 
