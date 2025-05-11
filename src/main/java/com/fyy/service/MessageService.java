@@ -12,6 +12,8 @@ public interface MessageService {
     Result<Message> getMessage(Long id);
     
     Result<List<Message>> getConversationMessages(Long userId, Long conversationId);
+
+    Result<List<Message>> getAllConversationMessages(Long userId);
     
     Result<Void> markMessageAsRead(Long userId, Long messageId);
     

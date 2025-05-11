@@ -60,6 +60,18 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public Result<List<Message>> getAllConversationMessages(Long userId) {
+        LambdaQueryWrapper<Message> wrapper = new LambdaQueryWrapper<>();
+        wrapper.nested(wq -> wq
+                        .eq(Message::getReceiverId, userId)
+                )
+                .orderByAsc(Message::getCreatedAt);
+
+        List<Message> messages = messageMapper.selectList(wrapper);
+        return Result.success(messages);
+    }
+
+    @Override
     @Transactional
     public Result<Void> markMessageAsRead(Long userId, Long messageId) {
         Message message = messageMapper.selectById(messageId);

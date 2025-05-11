@@ -46,6 +46,13 @@ public class MessageController {
         return messageService.getConversationMessages(userId, conversationId);
     }
 
+    @GetMapping("/conversations")
+    @Operation(summary = "获取全部会话消息列表")
+    public Result<List<Message>> getAllConversationMessages(HttpServletRequest request) {
+        Long userId = jwtUtil.getUserIdFromToken(request.getHeader("Authorization").substring(7));
+        return messageService.getAllConversationMessages(userId);
+    }
+
     @PutMapping("/{id}/read")
     @Operation(summary = "标记消息为已读")
     public Result<Void> markMessageAsRead(@PathVariable Long id, HttpServletRequest request) {
